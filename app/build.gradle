@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "27.0.2"
+    defaultConfig {
+        applicationId 'com.jizankj.miniprinter'
+        minSdkVersion 21
+        targetSdkVersion 21
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:26.1.0'
+    compile files('libs/core.jar')
+    compile files('libs/zypos1.5.jar')
+}
