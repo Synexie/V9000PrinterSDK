@@ -5,5 +5,7 @@ V9000 Android device including an embedded printer.
 
 More product details on http://en.jizankj.com/chanpin/dianzibiaoqian/2017-06-13/222.html#ad-image-0
 
-The code has been translated into english (UI elements, notification texts, sample receipts and code comments)
- and migrated from Eclipse to Android Studio 3.
+The code has been translated into english (UI elements, notification texts, sample receipts and code comments) 
+and migrated from Eclipse to Android Studio 3.
+ 
+The code does not include SDK, libraries or samples related to other capabilities of the device (barcode scanning, physical button customization...) 
