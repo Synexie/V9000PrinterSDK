@@ -26,29 +26,9 @@ import android.widget.TextView;
 
 public abstract class BarcodeCreater {
 
-	/**
-	 * 鍥剧墖涓ょ鎵�淇濈暀鐨勭┖鐧界殑瀹藉害
-	 */
 	private static int marginW = 20;
-	/**
-	 * 鏉″舰鐮佺殑缂栫爜绫诲瀷
-	 */
 	public static BarcodeFormat barcodeFormat = BarcodeFormat.CODE_128;
 
-	/**
-	 * 鐢熸垚鏉″舰鐮�
-	 * 
-	 * @param context
-	 * @param contents
-	 *            闇�瑕佺敓鎴愮殑鍐呭
-	 * @param desiredWidth
-	 *            鐢熸垚鏉″舰鐮佺殑瀹藉甫
-	 * @param desiredHeight
-	 *            鐢熸垚鏉″舰鐮佺殑楂樺害
-	 * @param displayCode
-	 *            鏄惁鍦ㄦ潯褰㈢爜涓嬫柟鏄剧ず鍐呭
-	 * @return
-	 */
 	public static Bitmap creatBarcode(Context context, String contents,
 			int desiredWidth, int desiredHeight, boolean displayCode,
 			int barType) {
@@ -64,7 +44,6 @@ public abstract class BarcodeCreater {
 				barcodeBitmap = encodeAsBitmap(contents, barcodeFormat,
 						desiredWidth, desiredHeight);
 			} catch (WriterException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Bitmap codeBitmap = creatCodeBitmap(contents, desiredWidth,
@@ -76,7 +55,6 @@ public abstract class BarcodeCreater {
 				ruseltBitmap = encodeAsBitmap(contents, barcodeFormat,
 						desiredWidth, desiredHeight);
 			} catch (WriterException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -84,15 +62,6 @@ public abstract class BarcodeCreater {
 		return ruseltBitmap;
 	}
 
-	/**
-	 * 鐢熸垚鏄剧ず缂栫爜鐨凚itmap
-	 * 
-	 * @param contents
-	 * @param width
-	 * @param height
-	 * @param context
-	 * @return
-	 */
 	public static Bitmap creatCodeBitmap(String contents, int width,
 			int height, Context context) {
 		TextView tv = new TextView(context);
@@ -116,18 +85,6 @@ public abstract class BarcodeCreater {
 		return bitmapCode;
 	}
 
-	/**
-	 * 鐢熸垚鏉″舰鐮佺殑Bitmap
-	 * 
-	 * @param contents
-	 *            闇�瑕佺敓鎴愮殑鍐呭
-	 * @param format
-	 *            缂栫爜鏍煎紡
-	 * @param desiredWidth
-	 * @param desiredHeight
-	 * @return
-	 * @throws WriterException
-	 */
 	public static Bitmap encode2dAsBitmap(String contents, int desiredWidth,
 			int desiredHeight, int barType) {
 		if (barType == 1) {
@@ -146,15 +103,6 @@ public abstract class BarcodeCreater {
 		return barcodeBitmap;
 	}
 
-	/**
-	 * 灏嗕袱涓狟itmap鍚堝苟鎴愪竴涓�
-	 * 
-	 * @param first
-	 * @param second
-	 * @param fromPoint
-	 *            绗簩涓狟itmap寮�濮嬬粯鍒剁殑璧峰浣嶇疆锛堢浉瀵逛簬绗竴涓狟itmap锛�
-	 * @return
-	 */
 	public static Bitmap mixtureBitmap(Bitmap first, Bitmap second,
 			PointF fromPoint) {
 		if (first == null || second == null || fromPoint == null) {
@@ -174,7 +122,7 @@ public abstract class BarcodeCreater {
 
 	public static Bitmap encodeAsBitmap(String contents, BarcodeFormat format,
 			int desiredWidth, int desiredHeight) throws WriterException {
-		final int WHITE = 0xFFFFFFFF; // 鍙互鎸囧畾鍏朵粬棰滆壊锛岃浜岀淮鐮佸彉鎴愬僵鑹叉晥鏋�
+		final int WHITE = 0xFFFFFFFF;
 		final int BLACK = 0xFF000000;
 
 		HashMap<EncodeHintType, String> hints = null;
@@ -220,7 +168,6 @@ public abstract class BarcodeCreater {
 		try {
 			stream = new FileOutputStream("/sdcard/" + filename);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

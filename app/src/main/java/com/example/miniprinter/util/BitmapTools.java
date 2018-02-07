@@ -28,20 +28,15 @@ public class BitmapTools {
 	}
 
 	public void PrintImageNew(Bitmap bitmapCode) {
-		// TODO Auto-generated method stub
 		int w = bitmapCode.getWidth();
 		int h = bitmapCode.getHeight();
-		//byte[] sendbuf = StartBmpToPrintCode(bitmapCode);
-
-		//write(sendbuf);
-
 	}
 
 
 	public static Bitmap convertToBlackWhite(Bitmap bmp) {
-		int width = bmp.getWidth(); // 鑾峰彇浣嶅浘鐨勫
-		int height = bmp.getHeight(); // 鑾峰彇浣嶅浘鐨勯珮
-		int[] pixels = new int[width * height]; // 閫氳繃浣嶅浘鐨勫ぇ灏忓垱寤哄儚绱犵偣鏁扮粍
+		int width = bmp.getWidth();
+		int height = bmp.getHeight();
+		int[] pixels = new int[width * height];
 		byte b;
 		bmp.getPixels(pixels, 0, width, 0, 0, width, height);
 		int alpha = 0xFF << 24;
@@ -70,14 +65,11 @@ public class BitmapTools {
 	}
 
 	public Bitmap bitmap2Gray(Bitmap bmSrc) {  
-        // 寰楀埌鍥剧墖鐨勯暱鍜屽  
-        int width = bmSrc.getWidth();  
+        int width = bmSrc.getWidth();
         int height = bmSrc.getHeight();  
-        // 鍒涘缓鐩爣鐏板害鍥惧儚  
-        Bitmap bmpGray = null;  
+        Bitmap bmpGray = null;
         bmpGray = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);  
-        // 鍒涘缓鐢诲竷  
-        Canvas c = new Canvas(bmpGray);  
+        Canvas c = new Canvas(bmpGray);
         Paint paint = new Paint();  
         ColorMatrix cm = new ColorMatrix();  
         cm.setSaturation(0);  
@@ -87,37 +79,26 @@ public class BitmapTools {
         return bmpGray;  
     }  
 	
-	// 璇ュ嚱鏁板疄鐜板鍥惧儚杩涜浜屽�煎寲澶勭悊  
-    public static Bitmap gray2Binary(Bitmap graymap) {  
-        //寰楀埌鍥惧舰鐨勫搴﹀拰闀垮害  
-        int width = graymap.getWidth();  
+    public static Bitmap gray2Binary(Bitmap graymap) {
+        int width = graymap.getWidth();
         int height = graymap.getHeight();  
-        //鍒涘缓浜屽�煎寲鍥惧儚  
-        Bitmap binarymap = null;  
+        Bitmap binarymap = null;
         binarymap = graymap.copy(Config.ARGB_8888, true);  
-        //渚濇寰幆锛屽鍥惧儚鐨勫儚绱犺繘琛屽鐞�  
-        for (int i = 0; i < width; i++) {  
+        for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {  
-                //寰楀埌褰撳墠鍍忕礌鐨勫��  
-                int col = binarymap.getPixel(i, j);  
-                //寰楀埌alpha閫氶亾鐨勫��  
-                int alpha = col & 0xFF000000;  
-                //寰楀埌鍥惧儚鐨勫儚绱燫GB鐨勫��  
-                int red = (col & 0x00FF0000) >> 16;  
+                int col = binarymap.getPixel(i, j);
+                int alpha = col & 0xFF000000;
+                int red = (col & 0x00FF0000) >> 16;
                 int green = (col & 0x0000FF00) >> 8;  
                 int blue = (col & 0x000000FF);  
-                // 鐢ㄥ叕寮廥 = 0.3脳R+0.59脳G+0.11脳B璁＄畻鍑篨浠ｆ浛鍘熸潵鐨凴GB  
-                int gray = (int) ((float) red * 0.3 + (float) green * 0.59 + (float) blue * 0.11);  
-                //瀵瑰浘鍍忚繘琛屼簩鍊煎寲澶勭悊  
-                if (gray <= 95) {  
+                int gray = (int) ((float) red * 0.3 + (float) green * 0.59 + (float) blue * 0.11);
+                if (gray <= 95) {
                     gray = 0;  
                 } else {  
                     gray = 255;  
                 }  
-                // 鏂扮殑ARGB  
-                int newColor = alpha | (gray << 16) | (gray << 8) | gray;  
-                //璁剧疆鏂板浘鍍忕殑褰撳墠鍍忕礌鍊�  
-                binarymap.setPixel(i, j, newColor);  
+                int newColor = alpha | (gray << 16) | (gray << 8) | gray;
+                binarymap.setPixel(i, j, newColor);
             }  
         }  
         return binarymap;  
@@ -128,7 +109,7 @@ public class BitmapTools {
 		int  height = img.getHeight();  
 		int area = width * height;  
 		int gray[][] = new int[width][height];  
-		int average = 0;// 鐏板害骞冲潎鍊�  
+		int average = 0;
 		int graysum = 0;  
 		int graymean = 0;  
 		int grayfrontmean = 0;  
@@ -138,21 +119,20 @@ public class BitmapTools {
 		int back = 0;  
 		int[] pix = new int[width * height];  
 		img.getPixels(pix, 0, width, 0, 0, width, height);  
-		for (int i = 1; i < width; i++) { // 涓嶇畻杈圭晫琛屽拰鍒楋紝涓洪伩鍏嶈秺鐣�  
+		for (int i = 1; i < width; i++) {
 			for (int j = 1; j < height; j++) {  
 				int x = j * width + i;  
 				int r = (pix[x] >> 16) & 0xff;  
 				int g = (pix[x] >> 8) & 0xff;  
 				int b = pix[x] & 0xff;  
-				pixelGray = (int) (0.3 * r + 0.59 * g + 0.11 * b);// 璁＄畻姣忎釜鍧愭爣鐐圭殑鐏板害  
+				pixelGray = (int) (0.3 * r + 0.59 * g + 0.11 * b);
 				gray[i][j] = (pixelGray << 16) + (pixelGray << 8) + (pixelGray);  
 				graysum += pixelGray;  
 			}  
 		}  
-		graymean = (int) (graysum / area);// 鏁翠釜鍥剧殑鐏板害骞冲潎鍊�  
+		graymean = (int) (graysum / area);
 		average = graymean;  
-		//Log.i(TAG,"Average:"+average);  
-		for (int i = 0; i < width; i++) // 璁＄畻鏁翠釜鍥剧殑浜屽�煎寲闃堝��  
+		for (int i = 0; i < width; i++)
 		{  
 			for (int j = 0; j < height; j++) {  
 				if (((gray[i][j]) & (0x0000ff)) < graymean) {  
@@ -164,12 +144,11 @@ public class BitmapTools {
 				}  
 			}  
 		}  
-		int frontvalue = (int) (grayfrontmean / front);// 鍓嶆櫙涓績  
-		int backvalue = (int) (graybackmean / back);// 鑳屾櫙涓績  
-		float G[] = new float[frontvalue - backvalue + 1];// 鏂瑰樊鏁扮粍  
+		int frontvalue = (int) (grayfrontmean / front);
+		int backvalue = (int) (graybackmean / back);
+		float G[] = new float[frontvalue - backvalue + 1];
 		int s = 0;  
-		//Log.i(TAG,"Front:"+front+"**Frontvalue:"+frontvalue+"**Backvalue:"+backvalue);  
-		for (int i1 = backvalue; i1 < frontvalue + 1; i1++)// 浠ュ墠鏅腑蹇冨拰鑳屾櫙涓績涓哄尯闂撮噰鐢ㄥぇ娲ユ硶绠楁硶锛圤TSU绠楁硶锛�  
+		for (int i1 = backvalue; i1 < frontvalue + 1; i1++)
 		{  
 			back = 0;  
 			front = 0;  
@@ -216,8 +195,7 @@ public class BitmapTools {
 		Bitmap temp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);  
 		temp.setPixels(pix, 0, width, 0, 0, width, height);  
 		return temp;
-		//image.setImageBitmap(temp);  
-	}  
+	}
 
 
 
@@ -234,43 +212,24 @@ public class BitmapTools {
 		for (int j = 0; j < height; j++) {
 			for (int i = 0; i < width; i++) {
 				int r = (rgba[index] & 0xFF000000) >> 24;
-			int g = (rgba[index] & 0xFF0000) >> 16;
+				int g = (rgba[index] & 0xFF0000) >> 16;
 				int b = (rgba[index] & 0xFF00) >> 8;
 
-		int y = (66 * r + 129 * g + 25 * b + 128 >> 8) + 16;
-		int u = (-38 * r - 74 * g + 112 * b + 128 >> 8) + 128;
-		int v = (112 * r - 94 * g - 18 * b + 128 >> 8) + 128;
+				int y = (66 * r + 129 * g + 25 * b + 128 >> 8) + 16;
+				int u = (-38 * r - 74 * g + 112 * b + 128 >> 8) + 128;
+				int v = (112 * r - 94 * g - 18 * b + 128 >> 8) + 128;
 
-		byte temp = (byte)(y > 255 ? 255 : y < 0 ? 0 : y);
-		yuv420sp[(index++)] = (byte) (temp > 0 ? 1 : 0);
-
-
-		//				{
-		//					if (f == 0) {
-		//						yuv420sp[index++] = 0;
-		//						f = 1;
-		//					} else {
-		//						yuv420sp[index++] = 1;
-		//						f = 0;
-		//					}
-		//				}
-
+				byte temp = (byte)(y > 255 ? 255 : y < 0 ? 0 : y);
+				yuv420sp[(index++)] = (byte) (temp > 0 ? 1 : 0);
 			}
-
 		}
 
 		f = 0;
 	}
 
-
-
-
-
-
-	public  static  byte[] bitmap2PrinterBytes (Bitmap bitmap){
+	public  static  byte[] bitmap2PrinterBytes (Bitmap bitmap) {
 		int width = bitmap.getWidth();
 		int height = bitmap.getHeight();
-		//Log.v("hello", "height?:"+height);
 		int startX = 0;
 		int startY = 0;
 		int offset = 0;
@@ -292,19 +251,14 @@ public class BitmapTools {
 
 		byte [] mData = new byte[iCount*width];
 
-		//Log.v("hello", "myiCount?:"+iCoun t);
 		for (int l = 0; l <= iCount - 1; l++) {
-			//Log.v("hello", "iCount?:"+l);
-			//Log.d("hello", "l?:"+l);
 			for (int i = 0; i < width; i++) {
 				int rowBegin = l * 8;
 				//Log.v("hello", "width?:"+i);
 				int tmpValue = 0;
 				int leftPos = 7;
 				int newheight = ((l + 1) * 8 - 1);
-				//Log.v("hello", "newheight?:"+newheight);
 				for (int j = rowBegin; j <=newheight; j++) {
-					//Log.v("hello", "width?:"+i+"  rowBegin?:"+j);
 					if (j >= height) {
 						colorValue = 0;
 					} else {
@@ -315,12 +269,8 @@ public class BitmapTools {
 							colorValue = 1;
 						}
 					}
-					//Log.d("hello", "rgbArray?:"+(offset + (j - startY)
-					//		* scansize + (i - startX)));
-					//Log.d("hello", "colorValue?:"+colorValue);
 					tmpValue = (tmpValue + (colorValue << leftPos));
-					leftPos = leftPos - 1;					
-
+					leftPos = leftPos - 1;
 				}
 				mData[writeNo]=(byte) tmpValue;
 				writeNo++;
@@ -329,8 +279,4 @@ public class BitmapTools {
 
 		return mData;
 	}
-
-
-
-
 }

@@ -41,15 +41,15 @@ public class PrintQueue {
 		void onFinish();
 
 		/**
-		 * 获取打印机状态
-		 * @param state  0：有纸   1：缺纸
+		 * Get the printer status
+		 * @param state  0：There is paper   1：Out of paper
 		 */
 		void onGetState(int state);
 
 		/**
-		 * 设置打印机时回复
-		 * （目前回复的内容只有黑标检测）
-		 * @param state 0:持续有纸  1：缺纸   2:检测到黑标
+		 * Reply when setting up the printer
+		 * （The content of the current reply only black mark detection）
+		 * @param state 0:Continue to have paper  1：Out of paper   2:Black mark detected
 		 */
 		void onPrinterSetting(int state);
 	}
@@ -76,13 +76,11 @@ public class PrintQueue {
 			mSendHandler = new Handler(){
 				@Override
 				public void handleMessage(Message msg) {
-					switch(msg.what){
-
-					case MSG_PRINT_NEXT:
-						log("PRINT_NEXT_DATA");
-						print();
-						break;
-
+					switch(msg.what) {
+						case MSG_PRINT_NEXT:
+							log("PRINT_NEXT_DATA");
+							print();
+							break;
 					}
 				}
 			};
@@ -247,7 +245,6 @@ public class PrintQueue {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
 			String action =  intent.getAction();
 			if(action.equalsIgnoreCase(PosApi.ACTION_POS_COMM_STATUS)){
 				int cmdFlag =intent.getIntExtra(PosApi.KEY_CMD_FLAG, -1); 
@@ -257,28 +254,26 @@ public class PrintQueue {
 
 					switch(status){
 					case PosApi.ERR_POS_PRINT_SUCC:
-						//打印成功
+						//Print successfully
 						printNext();
 						break;
 					case PosApi.ERR_POS_PRINT_NO_PAPER:
-						//打印缺纸
+						//Print out of paper
 						printStop(status);
 						break;
 					case PosApi.ERR_POS_PRINT_FAILED:
-						//打印失败
+						//Printing failed
 						printStop(status);
 						break;
 					case PosApi.ERR_POS_PRINT_VOLTAGE_LOW:
-						//电压过低
+						//The voltage is too low
 						printStop(status);
 						break;
 					case PosApi.ERR_POS_PRINT_VOLTAGE_HIGH:
-						//电压过高
+						//The voltage is too high
 						printStop(status);
 						break;
-
 					}
-
 				}
 				if(cmdFlag == PosApi.POS_PRINT_GET_STATE){
 					if(mListener==null){
@@ -299,13 +294,7 @@ public class PrintQueue {
 
 	};
 
-
-
-
 	private void log(String msg){
 		Log.d(TAG, msg);
 	}
-
-
-
 }

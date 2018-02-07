@@ -3,14 +3,11 @@ package com.example.miniprinter.util;
 public class ByteTools {
 	
 	public static int makeWord(byte a, byte b){
-		//浣嗘槸浣犱覆鍙ｄ竴娆″彧鑳戒紶閫�8涓綅锛岄偅涔堝氨鍒嗛珮瀛楄妭浣庡瓧鑺傦紝涓�涓瓧鑺�8浣嶏紝浣犲厛鎶婇珮8浣嶆斁鍦ㄤ竴涓�16浣嶇殑鍙橀噺閲宨 = xx锛岀劧鍚庢墽琛宨<<8锛涘啀i |= xx;杩欏氨鍚堝苟浜嗐�備綘鐨刬灏辨槸瀛樹簡瀵规柟16浣嶇殑鏁版嵁
 		return (a &0xff)|( ((b&0xff )<< 8));
 	}
-	
-	
-	
+
 	/**
-	 * Byte杞珺it
+	 * Byte2bit
 	 */
 	public static String byteToBit(byte b) {
 		return "" +(byte)((b >> 7) & 0x1) + 
@@ -24,7 +21,7 @@ public class ByteTools {
 	}
 
 	/**
-	 * Bit杞珺yte
+	 * Bit2byte
 	 */
 	public static byte BitToByte(String byteStr) {
 		int re, len;
@@ -35,13 +32,13 @@ public class ByteTools {
 		if (len != 4 && len != 8) {
 			return 0;
 		}
-		if (len == 8) {// 8 bit澶勭悊
-			if (byteStr.charAt(0) == '0') {// 姝ｆ暟
+		if (len == 8) {
+			if (byteStr.charAt(0) == '0') {
 				re = Integer.parseInt(byteStr, 2);
-			} else {// 璐熸暟
+			} else {
 				re = Integer.parseInt(byteStr, 2) - 256;
 			}
-		} else {//4 bit澶勭悊
+		} else {
 			re = Integer.parseInt(byteStr, 2);
 		}
 		return (byte) re;
